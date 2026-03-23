@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Resources ReclaimRevenue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FAFAF8;
+      --sage-light: #E8EDE6;
+      --sage-mid: #B8C9B2;
+      --sage: #7A9E72;
+      --sage-dark: #4A6B44;
+      --ink: #1C1F1A;
+      --ink-soft: #3D4239;
+      --ink-muted: #7A8275;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--white);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(250,250,248,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--sage-light);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--sage-dark); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-link {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active { color: var(--sage-dark); }
+
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--sage-dark);
+      padding: 0.6rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--ink); }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 10rem 4rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--ink);
+    }
+
+    .page-title em {
+      font-style: italic;
+      color: var(--sage-dark);
+    }
+
+    .page-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      font-weight: 300;
+      align-self: end;
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: var(--sage-light);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* RESOURCES GRID */
+    .resources {
+      padding: 5rem 4rem 8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--sage-light);
+      border: 1px solid var(--sage-light);
+    }
+
+    /* ============================================================
+       CALCULATOR CARD (spans full width)
+    ============================================================ */
+    .calc-card {
+      grid-column: 1 / -1;
+      background: var(--white);
+      padding: 3.5rem;
+      position: relative;
+    }
+
+    .calc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--sage-dark);
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      background: rgba(74,107,68,0.08);
+      padding: 0.3rem 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Calculator Layout */
+    .calc-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .calc-inputs { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .input-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-prefix {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      pointer-events: none;
+    }
+
+    .calc-input {
+      width: 100%;
+      padding: 0.75rem 0.9rem 0.75rem 1.8rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--sage-light);
+      border: 1px solid transparent;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      appearance: none;
+    }
+
+    .calc-input:focus {
+      border-color: var(--sage-dark);
+      background: var(--white);
+    }
+
+    .calc-input.no-prefix { padding-left: 0.9rem; }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 2px;
+      background: var(--sage-mid);
+      outline: none;
+      padding: 0;
+      margin-top: 0.3rem;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--sage-dark);
+      cursor: pointer;
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* Results Panel */
+    .calc-results {
+      background: var(--ink);
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .results-label {
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage-mid);
+      margin-bottom: 1.5rem;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .result-row:last-of-type { border-bottom: none; }
+
+    .result-name {
+      font-size: 0.8rem;
+      color: #9AA594;
+      font-weight: 300;
+    }
+
+    .result-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--white);
+      transition: color 0.3s;
+    }
+
+    .result-value.highlight { color: var(--sage-mid); }
+
+    .result-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 1rem 0;
+    }
+
+    .result-total-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sage-mid);
+      margin-bottom: 0.4rem;
+    }
+
+    .result-total {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      transition: all 0.4s;
+    }
+
+    .result-note {
+      margin-top: 1.2rem;
+      font-size: 0.75rem;
+      color: #6B7566;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .calc-cta {
+      display: block;
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--white);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .calc-cta:hover { background: var(--sage-mid); }
+
+    /* ============================================================
+       SMALLER LEAD MAGNET CARDS
+    ============================================================ */
+    .lead-card {
+      background: var(--white);
+      padding: 2.8rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lead-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--sage-mid);
+      transition: background 0.3s;
+    }
+
+    .lead-card:hover::before { background: var(--sage-dark); }
+
+    .lead-card-icon {
+      width: 40px; height: 40px;
+      margin-bottom: 1.5rem;
+      opacity: 0.7;
+    }
+
+    .lead-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .lead-card-desc {
+      font-size: 0.85rem;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      font-weight: 300;
+      flex: 1;
+      margin-bottom: 2rem;
+    }
+
+    /* Email capture form inside card */
+    .capture-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .capture-input {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--ink);
+      background: var(--sage-light);
+      border: 1px solid transparent;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .capture-input:focus { border-color: var(--sage-dark); background: var(--white); }
+    .capture-input::placeholder { color: var(--ink-muted); }
+
+    .capture-btn {
+      width: 100%;
+      padding: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--sage-dark);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .capture-btn:hover { background: var(--ink); }
+
+    .capture-privacy {
+      font-size: 0.7rem;
+      color: var(--ink-muted);
+      text-align: center;
+    }
+
+    .success-msg {
+      display: none;
+      padding: 1rem;
+      background: rgba(74,107,68,0.08);
+      border-left: 3px solid var(--sage-dark);
+      font-size: 0.82rem;
+      color: var(--sage-dark);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       CHECKLIST WIDGET (interactive)
+    ============================================================ */
+    .checklist-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--sage-light);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .check-item:last-child { border-bottom: none; }
+
+    .check-box {
+      width: 18px; height: 18px;
+      border: 1.5px solid var(--sage-mid);
+      flex-shrink: 0;
+      margin-top: 1px;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .check-item.checked .check-box {
+      border-color: var(--sage-dark);
+      background: var(--sage-dark);
+    }
+
+    .check-item.checked .check-box::after {
+      content: '';
+      position: absolute;
+      left: 4px; top: 1px;
+      width: 6px; height: 10px;
+      border: 2px solid var(--white);
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+
+    .check-text {
+      font-size: 0.84rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+
+    .check-item.checked .check-text {
+      color: var(--ink-muted);
+      text-decoration: line-through;
+      text-decoration-color: var(--sage-mid);
+    }
+
+    .checklist-progress {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 2px;
+      background: var(--sage-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--sage-dark);
+      transition: width 0.4s ease;
+    }
+
+    .progress-label {
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       STATS CREDIBILITY CARD
+    ============================================================ */
+    .truth-card {
+      background: var(--sage-light);
+      padding: 2.8rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .data-stat {
+      padding: 1.2rem;
+      background: var(--white);
+      position: relative;
+    }
+
+    .data-stat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--sage-dark);
+    }
+
+    .data-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--sage-dark);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .data-label {
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      font-weight: 300;
+    }
+
+    .stats-source {
+      font-size: 0.68rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      border-top: 1px solid var(--sage-mid);
+      padding-top: 1rem;
+      margin-top: auto;
+    }
+
+    /* ============================================================
+       BOTTOM STRIP
+    ============================================================ */
+    .bottom-strip {
+      background: var(--ink);
+      padding: 5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bottom-strip::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--sage-dark) 0%, transparent 60%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.12;
+    }
+
+    .strip-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage-mid);
+      margin-bottom: 1rem;
+    }
+
+    .strip-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .strip-title em { font-style: italic; color: var(--sage-mid); }
+
+    .strip-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--white);
+      padding: 1rem 2rem;
+      text-decoration: none;
+      transition: background 0.2s, gap 0.2s;
+    }
+
+    .strip-btn:hover { background: var(--sage-mid); gap: 1.2rem; }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--sage-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      text-decoration: none;
+    }
+
+    .footer-copy { font-size: 0.75rem; color: var(--ink-muted); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-hero > * {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .page-hero > *:nth-child(1) { animation-delay: 0.1s; }
+    .page-hero > *:nth-child(2) { animation-delay: 0.25s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-link { display: none; }
+
+      .page-hero {
+        grid-template-columns: 1fr;
+        padding: 8rem 1.5rem 3rem;
+        gap: 1.5rem;
+      }
+
+      .resources { padding: 3rem 1.5rem 5rem; }
+
+      .resources-grid { grid-template-columns: 1fr; }
+      .calc-card { grid-column: 1; }
+      .calc-layout { grid-template-columns: 1fr; }
+
+      .bottom-strip { padding: 4rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="logo">Reclaim<span>Revenue</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="resources.html" class="nav-link active">Free Resources</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div>
+      <p class="eyebrow">Free Tools &amp; Resources</p>
+      <h1 class="page-title">
+        Know exactly what<br/><em>your list is worth</em><br/>before we talk.
+      </h1>
+    </div>
+    <p class="page-desc">
+      Use the tools below to estimate the dormant revenue in your CRM and audit your follow-up gaps free, no strings attached. If the numbers surprise you, we should talk.
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RESOURCES -->
+  <section class="resources">
+    <div class="resources-grid">
+
+      <!-- ===================== CALCULATOR ===================== -->
+      <div class="calc-card">
+        <span class="card-tag">Interactive Calculator</span>
+        <h2 class="card-title">List Value Estimator</h2>
+        <p class="card-subtitle">Find out how much dormant revenue is sitting in your CRM right now.</p>
+
+        <div class="calc-layout">
+          <div class="calc-inputs">
+
+            <div class="input-group">
+              <label class="input-label" for="dormantLeads">Dormant leads in your CRM</label>
+              <div class="input-wrapper">
+                <input type="number" id="dormantLeads" class="calc-input no-prefix" value="500" min="0" oninput="calcUpdate()">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label" for="avgDealValue">Average deal / project value</label>
+              <div class="input-wrapper">
+                <span class="input-prefix">$</span>
+                <input type="number" id="avgDealValue" class="calc-input" value="3000" min="0" oninput="calcUpdate()">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label" for="closeRate">Your typical close rate: <span id="closeRateLabel">15%</span></label>
+              <input type="range" id="closeRate" min="1" max="60" value="15" oninput="calcUpdate(); document.getElementById('closeRateLabel').textContent = this.value + '%'">
+              <div class="range-labels"><span>1%</span><span>30%</span><span>60%</span></div>
+            </div>
+
+          </div><!-- /calc-inputs -->
+
+          <div class="calc-results">
+            <p class="results-label">Your Estimated Opportunity</p>
+
+            <div class="result-row">
+              <span class="result-name">Leads worth contacting</span>
+              <span class="result-value" id="res-leads"</span>
+            </div>
+            <div class="result-row">
+              <span class="result-name">Projected new deals</span>
+              <span class="result-value" id="res-deals"</span>
+            </div>
+
+            <div class="result-divider"></div>
+
+            <p class="result-total-label">Dormant Revenue Estimate</p>
+            <div class="result-total" id="res-total">$0</div>
+
+            <p class="result-note">
+              You keep <strong style="color:#9AA594">85%</strong> of every dollar. Our fee is 15%, charged only on revenue we generate.
+            </p>
+
+            <a href="https://calendar.app.google/gRddYpq5GxnKWLfi8" target="_blank" rel="noopener" class="calc-cta">
+              Claim this revenue →
+            </a>
+          </div><!-- /calc-results -->
+        </div><!-- /calc-layout -->
+      </div><!-- /calc-card -->
+
+      <!-- ===================== CHECKLIST ===================== -->
+      <div class="lead-card">
+        <svg class="lead-card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="4" width="24" height="32" rx="1" stroke="#4A6B44" stroke-width="1.5"/>
+          <path d="M11 14h12M11 20h12M11 26h7" stroke="#4A6B44" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="31" cy="31" r="7" fill="#E8EDE6" stroke="#4A6B44" stroke-width="1.5"/>
+          <path d="M28 31l2 2 4-4" stroke="#4A6B44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <span class="card-tag">Self-Audit</span>
+        <h3 class="lead-card-title">Follow-Up Audit Checklist</h3>
+        <p class="lead-card-desc">14 questions to diagnose exactly where your revenue is leaking. Check off what you already do well.</p>
+
+        <div class="checklist-progress">
+          <div class="progress-bar"><div class="progress-fill" id="checkProgress" style="width:0%"></div></div>
+          <span class="progress-label" id="checkLabel">0 / 14</span>
+        </div>
+
+        <div class="checklist-body" id="checklist">
+          <!-- Items injected by JS -->
+        </div>
+
+      </div>
+
+      <!-- ===================== STATS ===================== -->
+      <div class="truth-card">
+        <span class="card-tag">Industry Data</span>
+        <h3 class="lead-card-title" style="margin-bottom:0.4rem;">The numbers behind why this works</h3>
+        <p class="card-subtitle" style="margin-bottom:1.8rem;">From studies covering hundreds of millions of B2B emails sent in 2024–2025.</p>
+
+        <div class="stats-grid">
+          <div class="data-stat">
+            <div class="data-number">49%</div>
+            <p class="data-label">reply rate lift from a single well-timed follow-up- the single highest-return action in any outreach sequence</p>
+          </div>
+          <div class="data-stat">
+            <div class="data-number">142%</div>
+            <p class="data-label">more replies from highly personalized emails with customized messages and subject lines</p>
+          </div>
+          <div class="data-stat">
+            <div class="data-number">70%</div>
+            <p class="data-label">of salespeople quit after the first contact yet 80% of sales require five or more follow-up touches</p>
+          </div>
+          <div class="data-stat">
+            <div class="data-number">3.4×</div>
+            <p class="data-label">more meetings booked with timeline-based hooks vs. problem-statement hooks- the approach we use</p>
+          </div>
+        </div>
+
+        <p class="stats-source">Belkins B2B Cold Email Response Rates Study (16.5M emails, 2024) · Digital Bloom Cold Outbound Benchmarks 2025 · Woodpecker via Smartlead 2025</p>
+      </div>
+
+    </div><!-- /resources-grid -->
+  </section>
+
+  <!-- BOTTOM STRIP -->
+  <section class="bottom-strip">
+    <p class="strip-label">Ready when you are</p>
+    <h2 class="strip-title">15 minutes to find out<br/><em>what your list is hiding.</em></h2>
+    <a href="https://calendar.app.google/gRddYpq5GxnKWLfi8" target="_blank" rel="noopener" class="strip-btn">
+      Book a Free Call
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </section>
+
+  <div style="background:var(--white);padding:1.5rem 4rem;border-top:1px solid var(--sage-light);">
+    <p style="font-size:0.72rem;color:var(--ink-muted);line-height:1.7;max-width:900px;margin:0 auto;text-align:center;">Calculator results are estimates only, based on inputs you provide. Actual results depend on list quality, offer strength, market conditions, and other factors. No specific outcomes are guaranteed.</p>
+  </div>
+
+  <footer>
+    <a href="index.html" class="footer-logo">ReclaimRevenue</a>
+    <p class="footer-copy">© 2026 Reclaim Revenue. All rights reserved.</p>
+  </footer>
+
+  <script>
+    /* ==================== CALCULATOR ==================== */
+    function fmt(n) {
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
+
+    function calcUpdate() {
+      const leads  = parseFloat(document.getElementById('dormantLeads').value) || 0;
+      const deal   = parseFloat(document.getElementById('avgDealValue').value) || 0;
+      const close  = parseFloat(document.getElementById('closeRate').value) / 100;
+      const react  = 0.08; // conservative internal assumption
+
+      const qualified = Math.round(leads * 0.85);
+      const deals     = Math.round(qualified * react * close);
+      const revenue   = deals * deal;
+
+      document.getElementById('res-leads').textContent = qualified.toLocaleString();
+      document.getElementById('res-deals').textContent = deals.toLocaleString();
+      document.getElementById('res-total').textContent = fmt(revenue);
+    }
+
+    calcUpdate();
+
+    /* ==================== CHECKLIST ==================== */
+    const checkItems = [
+      "We follow up with every new lead within 24 hours",
+      "We have a written follow-up sequence beyond the first contact",
+      "We segment leads by intent or interest level",
+      "Dormant leads receive at least one touchpoint per quarter",
+      "Our CRM is up to date with contact and status info",
+      "We track why leads went cold (not just that they did)",
+      "We have a defined re-engagement campaign for cold lists",
+      "Our emails are personalized beyond just a first name",
+      "We A/B test subject lines on reactivation emails",
+      "We measure reply rate, not just open rate",
+      "Leads from 6–18 months ago are in an active nurture sequence",
+      "We have a clear offer specifically for reactivating dormant contacts",
+      "Our email domain is properly authenticated (DKIM/SPF/DMARC)",
+      "We review dormant lead value vs new lead acquisition cost monthly",
+    ];
+
+    const listEl = document.getElementById('checklist');
+
+    checkItems.forEach((text, i) => {
+      const item = document.createElement('div');
+      item.className = 'check-item';
+      item.innerHTML = `<div class="check-box"></div><span class="check-text">${text}</span>`;
+      item.addEventListener('click', () => {
+        item.classList.toggle('checked');
+        updateProgress();
+      });
+      listEl.appendChild(item);
+    });
+
+    function updateProgress() {
+      const total   = checkItems.length;
+      const checked = document.querySelectorAll('.check-item.checked').length;
+      const pct     = (checked / total) * 100;
+      document.getElementById('checkProgress').style.width = pct + '%';
+      document.getElementById('checkLabel').textContent = checked + ' / ' + total;
+    }
+
+    /* ==================== FORM SUBMIT ==================== */
+    function submitForm(formId, successId) {
+      const form = document.getElementById(formId);
+      const success = document.getElementById(successId);
+
+      // Basic email validation
+      const emailEl = form.querySelector('input[type="email"]');
+      if (emailEl && !emailEl.value.includes('@')) {
+        emailEl.style.borderColor = '#c0392b';
+        emailEl.focus();
+        return;
+      }
+
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
